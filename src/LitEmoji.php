@@ -157,8 +157,11 @@ class LitEmoji
      * @return string
      */
     public static function shortcodeToEntities($content) {
-        $replacements = self::getShortcodeEntities();
-        return str_replace(array_keys($replacements), $replacements, $content);
+        global $replacements;
+        if ($replacements == null) {
+            $replacements = self::getShortcodeEntities();
+        }
+        return strtr($content, $replacements);
     }
 
     /**
